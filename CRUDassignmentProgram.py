@@ -33,40 +33,6 @@ DataUMKM = {
 }
 
 
-DataUMKM = {
-    'ID1' : {'nama' : 'Umam Pet Shop',
-            'bidang' : 'Pet Care',
-            'noTelp' : '08123466723',
-            'alamat' : 'Jl. Kenanga No. 4',
-            'kota' : 'Malang'
-    },
-    'ID2' : {'nama' : 'Dian Knalpot',
-            'bidang' : 'Otomotif',
-            'noTelp' : '081234661029',
-            'alamat' : 'Jl. Panglima Sudirman No. 93',
-            'kota' : 'Surabaya'   
-    },
-    'ID3' :{'nama' : 'Santoso Tailor',
-            'bidang' : 'Tekstil',
-            'noTelp' : '0893457834566',
-            'alamat' : 'Jl. Untung Suropati No. 23',
-            'kota': 'Surabaya'
-    },
-    'ID4' :{'nama' : 'Cak Bobby Batik',
-            'bidang' : 'Tekstil',
-            'noTelp' : '08934574647387',
-            'alamat' : 'Jl. Batik No. 102',
-            'kota' : 'Yogyakarta'
-    },
-    'ID5' :{'nama' : 'Yanti Apem',
-            'bidang' : 'Makanan',
-            'noTelp' : '08567574647387',
-            'alamat' : 'Jl. Sudirman No. 7',
-            'kota' : 'Jakarta'
-    }
-}
-
-
 def guestScreen():
     print('\n===== Yellow Pages UMKM Indonesia =====\n')
     mainMenu = int(input('''\n[1] Melihat Daftar UMKM 
@@ -109,7 +75,7 @@ def loginScreen():
     userName = input('Masukkan username anda: ').lower()
     if userName == 'admin':
         passWord = getpass.getpass('Masukkan password anda: ')
-        if passWord == 'admin123':
+        if passWord == 'admin':
             print(f'\nHalo! Selamat datang Admin!')
             Mainmenu()
         else:
@@ -117,7 +83,7 @@ def loginScreen():
             loginScreen()
     elif userName == 'user':
         passWord = getpass.getpass('Masukkan password anda: ')
-        if passWord == 'user123':
+        if passWord == 'user':
             print(f'\nHalo! Selamat datang User!')
             userMainMenu()
         else:
@@ -511,7 +477,11 @@ def userTambahData():
         print('\nMasukkan No. Telepon yang valid\n')
         userTambahData()
 
-       
+
+lastUMKMID = 0  # Inisialisasi ID terakhir dengan 0 untuk auto decrement
+if DataUMKM:
+    lastUMKMID = max(int(key[2:]) for key in DataUMKM.keys())
+
 def hapusData():
     print('\n===== Menu Hapus Data UMKM =====\n')
     printDataUMKM()
