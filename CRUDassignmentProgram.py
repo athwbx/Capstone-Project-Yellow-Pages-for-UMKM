@@ -1,4 +1,5 @@
 import getpass
+import time
 DataUMKM = {
     'ID1' : {'nama' : 'Umam Pet Shop',
             'bidang' : 'Pet Care',
@@ -59,7 +60,9 @@ def guestScreen():
             guestScreen()
         elif mauApa == 3:
             print('\nTerima kasih telah menggunakan aplikasi Yellow Pages UMKM Indonesia!\n')
+            time.sleep(1)
             exit()
+
         else:
             print('\nSilahkan pilih inputan yang valid! [1-3]\n')
             guestScreen()
@@ -67,6 +70,7 @@ def guestScreen():
         loginScreen()
     elif mainMenu == 3:
         print('\nTerima kasih telah menggunakan aplikasi Yellow Pages UMKM Indonesia!\n')
+        time.sleep(1)
         exit()
 
 
@@ -436,6 +440,7 @@ def tambahData():
 
 
 def userTambahData():
+    userTempDict = {}
     print('\n===== Menu Tambah Data UMKM =====\n')
     idUMKM = len(DataUMKM) +1 # Auto Increment ID UMKM
     namaUMKM = input('Masukkan nama UMKM: ').title()
@@ -463,7 +468,7 @@ def userTambahData():
         # Memberikan validasi kepada user apa benar data ini yang ingin ditambahkan
         validasi = input('Apakah anda yakin dengan data ini? (Y/N): ').upper()
         if validasi == 'Y': # Menambahkan data apabila user input 'Y'
-            DataUMKM.update(UMKMBaru)
+            DataUMKM.update(userTempDict)
             printDataUMKM()
             print(f'Data dengan Nama UMKM {namaUMKM}, dengan bidang {bidangUMKM} berhasil disimpan dengan ID: {idUMKM}\n')
 
