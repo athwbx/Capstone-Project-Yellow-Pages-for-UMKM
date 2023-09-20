@@ -73,6 +73,42 @@ def guestScreen():
         time.sleep(1)
         exit()
 
+def cekAjuan():
+    print('\n===== Data Ajuan Tambah Data UMKM =====\n')
+    if len(userTempDict) > 0:
+        print(f'Hai admin! Ada {len(userTempDict)} ajuan user untuk tambah data nih. Silahkan review satu persatu untuk disimpan ke database ya!\n')
+        for idUMKM, dataUMKM in userTempDict.items():
+            print(f"ID: {idUMKM}")
+            print(f"Nama: {dataUMKM['nama']}")
+            print(f"Bidang: {dataUMKM['bidang']}")
+            print(f"Nomor Telepon: {dataUMKM['noTelp']}")
+            print(f"Alamat: {dataUMKM['alamat']}")
+            print(f"Kota: {dataUMKM['kota']}\n")
+            validasi = input('Apakah admin menyetujui ajuan tambah data ini?\nApabila iya, akan disimpan dalam database (Y/N): ').upper()
+            if validasi == 'Y':
+                DataUMKM.update({idUMKM:dataUMKM})
+                print('Baik! Data telah ditambahkan pada database DataUMKM!\n')
+            elif validasi == 'N':
+                pass
+            else:
+                print('Tolong masukkan inputan yang valid! (Y/N)')
+                cekAjuan()
+        clearDictGa() 
+        
+
+def clearDictGa():
+    clearDictga = input('\nTerima kasih admin telah memproses ajuan user!\nApakah anda mau menghapus semua ajuan user? (Y/N): ').upper()
+    if clearDictga == 'Y':
+        print('\nBaik! Semua ajuan user telah dihapus')
+        userTempDict.clear()
+        Mainmenu()
+    elif clearDictga == 'N':
+        print('\nBaik. Semua ajuan user tidak dihapus')
+        Mainmenu()
+    else:
+        print('Tolong masukkan inputan yang valid! (Y/N)')
+        clearDictGa()
+        
 
 def loginScreen():
     print('\n===== Menu Login Program UMKM =====\n')
@@ -102,7 +138,7 @@ def userMainMenu():
     print('\n===== Yellow Pages UMKM Indonesia =====\n')
     mainMenu = int(input('''\n[1] Daftar UMKM 
                   \n[2] Menambahkan Data UMKM 
-                  \n[3] Exit 
+                  \n[3] Logout 
                   \nSilahkan Pilih Main Menu [1-3]: '''))
     
     if mainMenu == 1:
@@ -126,7 +162,8 @@ def Mainmenu():
                   \n[2] Menambahkan Data UMKM 
                   \n[3] Menghapus Data UMKM
                   \n[4] Edit Data UMKM
-                  \n[5] Exit 
+                  \n[5] Cek Ajuan Tambah Data User
+                  \n[6] Logout 
                   \nSilahkan Pilih Main Menu [1-5]: '''))
     
     if mainMenu == 1:
@@ -142,6 +179,9 @@ def Mainmenu():
         editData()
 
     elif mainMenu == 5:
+        cekAjuan()
+    
+    elif mainMenu == 6:
         print('\nTerima kasih Admin telah menggunakan aplikasi Yellow Pages UMKM Indonesia!\n')
         guestScreen()
 
@@ -438,11 +478,11 @@ def tambahData():
         print('\nMasukkan No. Telepon yang valid\n')
         tambahData()
 
+userTempDict = {}
 
 def userTambahData():
-    userTempDict = {}
     print('\n===== Menu Tambah Data UMKM =====\n')
-    idUMKM = len(DataUMKM) +1 # Auto Increment ID UMKM
+    idUMKM = len(DataUMKM) + len(userTempDict) +1 # Auto Increment ID UMKM
     namaUMKM = input('Masukkan nama UMKM: ').title()
     bidangUMKM = input('Masukkan bidang UMKM: ').title()
     teleponUMKM = input('Masukkan No. Telepon UMKM: ')
@@ -468,9 +508,9 @@ def userTambahData():
         # Memberikan validasi kepada user apa benar data ini yang ingin ditambahkan
         validasi = input('Apakah anda yakin dengan data ini? (Y/N): ').upper()
         if validasi == 'Y': # Menambahkan data apabila user input 'Y'
-            DataUMKM.update(userTempDict)
+            userTempDict.update(UMKMBaru)
             printDataUMKM()
-            print(f'Data dengan Nama UMKM {namaUMKM}, dengan bidang {bidangUMKM} berhasil disimpan dengan ID: {idUMKM}\n')
+            print(f'Data dengan Nama UMKM {namaUMKM}, dengan bidang {bidangUMKM} berhasil disimpan dengan ID: {idUMKM}.\nTunggu Validasi admin untuk menambahkan data anda pada database ya!')
 
             # Memberi pilihan user apakah ingin menambah data lagi atau tidak
             userTambahDataLagi() 
@@ -482,10 +522,6 @@ def userTambahData():
         print('\nMasukkan No. Telepon yang valid\n')
         userTambahData()
 
-
-lastUMKMID = 0  # Inisialisasi ID terakhir dengan 0 untuk auto decrement
-if DataUMKM:
-    lastUMKMID = max(int(key[2:]) for key in DataUMKM.keys())
 
 def hapusData():
     print('\n===== Menu Hapus Data UMKM =====\n')
