@@ -861,4 +861,3 @@ def userEditAjuanLagi(): # fungsi untuk validasi user mau edit ajuan data lagi a
 
 while True:
     guestScreen()
-    
