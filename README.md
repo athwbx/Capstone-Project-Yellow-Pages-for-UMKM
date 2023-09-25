@@ -1,6 +1,6 @@
 # Capstone-Project-Yellow-Pages-for-UMKM
 
-![Yellow Pages for UMKM Logo](https://github.com/athwbx/Capstone-Project-Yellow-Pages-for-UMKM/blob/main/yellowPagesforUMKMLogo.png?raw=true)
+![Yellow Pages for UMKM Logo](https://github.com/athwbx/Capstone-Project-Yellow-Pages-for-UMKM/blob/main/yellowpages.png)
 ## Context
 
 UMKM (Usaha Mikro, Kecil, dan Menengah) or Small and Medium-sized Enterprises face challenges in running their businesses effectively. 
